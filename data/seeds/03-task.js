@@ -9,11 +9,13 @@ exports.seed = function(knex) {
           completed: 0 
         },
         {
-          description: 'rowValue2',
-          taskName: 'newTask',
+          projectId: 2, 
+          taskName: 'newTask2',
+          description: 'rowValue2', 
           notes: 'optional',
-          projectId: 2,
           completed: 0 
+
+          
         },
       ]);
   };
