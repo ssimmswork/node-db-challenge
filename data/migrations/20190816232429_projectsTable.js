@@ -9,12 +9,18 @@ exports.up = function(knex) {
             .inTable('resources')
             .onUpdate('CASCADE')
             .onDelete('CASCADE');
-        tbl.string('name', 128)
-            .notNullable();
+        tbl.string('projectName', 128)
+            .notNullable()
+            .unique();
         tbl.string('description', 128);
+        tbl.boolean('completed').notNullable();
     })
-    .createTable('resources', tbl => {
+        .createTable('resources', tbl => {
         tbl.increments();
+        tbl.string('resourceName', 128)
+            .notNullable()
+            .unique();
+        tbl.string('description',128)  
         tbl.integer('projectId')
             .unsigned()
             .notNullable()
@@ -22,12 +28,15 @@ exports.up = function(knex) {
             .inTable('projects')
             .onUpdate('CASCADE')
             .onDelete('CASCADE');
-        tbl.string('name', 128)
-            .notNullable()
-        tbl.string('description',128)    
+        tbl.boolean('completed')
+            .notNullable();    
+         
     })
     .createTable('task', tbl => {
         tbl.increments();
+        tbl.string('taskName')
+            .notNullable()
+            .unique()
         tbl.integer('ProjectId')
             .unsigned()
             .notNullable()
@@ -39,6 +48,7 @@ exports.up = function(knex) {
             .notNullable;
         tbl.string('notes',128)    
     })
+        tbl.boolean('completed').notNullable();
     
 };
 
