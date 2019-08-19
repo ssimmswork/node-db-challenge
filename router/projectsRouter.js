@@ -6,6 +6,7 @@ router.get('/', async (req,res) => {
  
     try{
        const project = await projectsModel.find();
+       
         res.json(project);
     }
     catch(err){

@@ -1,6 +1,6 @@
 
 exports.seed = function(knex) {
-    return knex('task').insert([
+    return knex('tasks').insert([
         {
           projectId: 1, 
           taskName: 'newTask',

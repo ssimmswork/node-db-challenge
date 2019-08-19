@@ -13,98 +13,97 @@ module.exports = {
     findTask, 
 };
 
-async function add(project){
-    const [id] = await db('project')
-        .insert(project);
+async function add(projects){
+    const [id] = await db('projects')
+        .insert(projects);
     return findById(id);
 }
 
 async function addTask(task){
-    const [id] = await db('task')
+    const [id] = await db('tasks')
         .insert(task);
     return findTaskById(id);
 }
 
 async function addResource(resource){
-    const [id] = await db('resource')
+    const [id] = await db('resources')
         .insert(resource);
     returnfindTaskById(id);
 }
 
 async function update(newUpdate,id){
-    await db('project')
+    await db('projects')
         .where({id})
         .update(newUpdate);
     return findById(id);    
 }
 
 async function update(newUpdate,id){
-    await db('task')
+    await db('tasks')
         .where({id})
         .update(newUpdate);
     return findTaskById(id);    
 }
 
 async function update(newUpdate,id){
-    await db('resource')
+    await db('resources')
         .where({id})
         .update(newUpdate);
     return findResourceById(id);    
 }
 
 function remove(id){
-    return db('project')
+    return db('projects')
         .where({id})
         .del
 }
 
 function find() {
-    
-    return db('project');
+    return db('projects');
   }
   
   function findById(id) {
-    return db('project')
+    return db('projects')
       .where({ id })
       .first();
   }
   
-  function findTask(project_id) {
-    return db('task as t')
-      .join('project as p', 'p.id', 't.projectId')
+  function findTask(projectId) {
+    return db('tasks as t')
+      .join('projects as p', 'p.id', 't.projectId')
       .select(
         't.id',
-        't.taskName as task',
+        't.taskName as tasks',
         't.description',
         't.notes',
         't.completed',
         'p.id as projectId',
-        'p.projectName as project'
+        'p.projectName as projects'
       )
       .where({ projectId });
   }
   
   function findResource(projectId) {
-    return db('resource as r')
-      .join('project as p', 'p.id', 'r.projectId')
+    return db('resources as r')
+      .join('projects as p', 'p.id', 'r.projectId')
       .select(
         'r.id',
         'r.resourceName',
         'r.description',
         'p.id as projectId',
-        'p.projectName as project'
+        'p.projectName as projects'
       )
       .where({ projectId });
   }
   
   function findTaskById(id) {
-    return db('task')
+    return db('tasks')
       .where({ id })
       .first();
   }
   
   function findResourceById(id) {
-    return db('resource')
+    return db('resources')
       .where({ id })
       .first();
   }

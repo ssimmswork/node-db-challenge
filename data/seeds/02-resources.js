@@ -1,6 +1,6 @@
 
 exports.seed = function(knex) {
-    return knex('resource').insert([
+    return knex('resources').insert([
         {
           projectId: 1, 
           resourceName: 'rowValue1', 
