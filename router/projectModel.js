@@ -59,7 +59,7 @@ function remove(id){
 }
 
 function find() {
-    console.log('1')
+    
     return db('project');
   }
   
