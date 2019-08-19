@@ -57,3 +57,55 @@ function remove(id){
         .where({id})
         .del
 }
+
+function find() {
+    console.log('1')
+    return db('project');
+  }
+  
+  function findById(id) {
+    return db('project')
+      .where({ id })
+      .first();
+  }
+  
+  function findTask(project_id) {
+    return db('task as t')
+      .join('project as p', 'p.id', 't.projectId')
+      .select(
+        't.id',
+        't.taskName as task',
+        't.description',
+        't.notes',
+        't.completed',
+        'p.id as projectId',
+        'p.projectName as project'
+      )
+      .where({ projectId });
+  }
+  
+  function findResource(projectId) {
+    return db('resource as r')
+      .join('project as p', 'p.id', 'r.projectId')
+      .select(
+        'r.id',
+        'r.resourceName',
+        'r.description',
+        'p.id as projectId',
+        'p.projectName as project'
+      )
+      .where({ projectId });
+  }
+  
+  function findTaskById(id) {
+    return db('task')
+      .where({ id })
+      .first();
+  }
+  
+  function findResourceById(id) {
+    return db('resource')
+      .where({ id })
+      .first();
+  }
+  

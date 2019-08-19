@@ -3,8 +3,10 @@ const router = express.Router();
 const projectsModel = require('./projectModel');
 
 router.get('/', async (req,res) => {
+  console.log('1')
     try{
-        const project = await projectsModel.find();
+       const project = await projectsModel.find();
+       console.log('2')
         res.json(project);
     }
     catch(err){
